@@ -104,11 +104,11 @@ const Login = () => {
       <div className="auth-box">
         {currentStep === "phone" && (
           <div>
-            <h4 className="login-head">Communicate Together Better.</h4>
+            <h4 className="login-head">Join Us. Communicate's Together Better.</h4>
             <p className="login-para">
               Start here. One number. Infinite conversations.
             </p>
-            <div style={{ marginTop: "35px" }}>
+            <div style={{ marginTop: "40px" }}>
               <p className="label">Phone Number</p>
               <div className="phone-input">
                 <div className="phone-icon">

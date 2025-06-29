@@ -1,11 +1,6 @@
 import React from "react";
-import SplashImg from "../assets/splash.jpeg";
-import Img1 from "../assets/Config 2023_ оновлення Figma для співпраці дизайнерів та розробників.jpeg";
-import Img2 from "../assets/download (1).gif";
-import Img3 from "../assets/Enle Li.gif";
-import Img4 from "../assets/IBM — Jordan Scott.gif";
-import Img5 from "../assets/ILLO.gif";
-import Img6 from "../assets/SIKB｜Explainer Video - BACILE _.gif";
+import SplashMotionImg from "../assets/SplashMotion.gif";
+
 
 const cityNames = [
   "San Francisco",
@@ -35,6 +30,7 @@ const SplashScreen = () => {
         Connect. Collaborate. <span style={{ fontStyle: "italic" }}>Fuse</span>{" "}
         it all.
       </p>
+
       <div className="rotated-city">
         <div className="scroll-track">
           {[...cityNames, ...cityNames].map((item, index) => (
@@ -53,8 +49,12 @@ const SplashScreen = () => {
         </div>
       </div>
       <div className="splash-img">
-        <img src={Img2} alt="" />
+        <img src={SplashMotionImg} alt="" />
       </div>
+      <p className="desktop-warning">
+        FuseTalk is designed only for mobile devices. Please open this site on a
+        phone.
+      </p>
       <p className="tagline">The future of connected conversations.</p>
       <p className="tagline">
         Fuse people, ideas and conversation from workrooms to whispers — all in

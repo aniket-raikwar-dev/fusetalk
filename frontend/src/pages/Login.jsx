@@ -101,7 +101,7 @@ const Login = () => {
           <div>
             <h4 className="login-head">Communicate Together Better.</h4>
             <p className="login-para">Start here. One number. Infinite conversations.</p>
-            <div style={{ marginTop: "25px"}}>
+            <div style={{ marginTop: "35px"}}>
               <p className="label">Phone Number</p>
               <div className="phone-input">
                 <div className="phone-icon">

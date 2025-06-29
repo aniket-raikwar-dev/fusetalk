@@ -1,5 +1,6 @@
 import React from "react";
 import SplashMotionImg from "../assets/SplashMotion.gif";
+import { useNavigate } from "react-router-dom";
 
 const cityNames = [
   "San Francisco",
@@ -17,6 +18,10 @@ const cityNames = [
 ];
 
 const SplashScreen = () => {
+
+
+  const navigate = useNavigate();
+
   return (
     <div className="splash-screen">
       <h3>
@@ -62,7 +67,7 @@ const SplashScreen = () => {
         one place.
       </p>
 
-      <button className="splash-btn">
+      <button className="splash-btn" onClick={() => navigate("/login")}>
         Join Us Now{" "}
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#000">
           <path d="M1.99974 13.0001L1.9996 11.0002L18.1715 11.0002L14.2218 7.05044L15.636 5.63623L22 12.0002L15.636 18.3642L14.2218 16.9499L18.1716 13.0002L1.99974 13.0001Z"></path>

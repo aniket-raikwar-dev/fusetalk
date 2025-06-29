@@ -1,7 +1,6 @@
 import React from "react";
 import SplashMotionImg from "../assets/SplashMotion.gif";
 
-
 const cityNames = [
   "San Francisco",
   "Toronto",
@@ -48,6 +47,7 @@ const SplashScreen = () => {
           ))}
         </div>
       </div>
+
       <div className="splash-img">
         <img src={SplashMotionImg} alt="" />
       </div>
@@ -55,12 +55,23 @@ const SplashScreen = () => {
         FuseTalk is designed only for mobile devices. Please open this site on a
         phone.
       </p>
+
       <p className="tagline">The future of connected conversations.</p>
       <p className="tagline">
         Fuse people, ideas and conversation from workrooms to whispers — all in
         one place.
       </p>
-      <button className="splash-btn">Continue</button>
+
+      <button className="splash-btn">
+        Contibue With Us{" "}
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="#000"
+        >
+          <path d="M1.99974 13.0001L1.9996 11.0002L18.1715 11.0002L14.2218 7.05044L15.636 5.63623L22 12.0002L15.636 18.3642L14.2218 16.9499L18.1716 13.0002L1.99974 13.0001Z"></path>
+        </svg>
+      </button>
     </div>
   );
 };

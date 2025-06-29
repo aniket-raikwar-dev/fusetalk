@@ -18,10 +18,11 @@ const cityNames = [
 ];
 
 const Login = () => {
+  const [currentStep, setCurrentStep] = useState("phone");
   const [otpBoxes, setOtpBoxes] = useState(Array(6).fill(""));
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [isOtpVerifyBtnEnabled, setIsOtpVerifyBtnEnabled] = useState(false);
-  const [isOtpSent, setIsOtpSent] = useState(false);
+  const [isOtpVerifyBtnEnabled, setIsOtpVerifyBtnEnabled] = useState(true);
+
   const inputsRef = useRef([]);
 
   const handlePhoneInputChange = (e) => {
@@ -52,8 +53,16 @@ const Login = () => {
     }
   };
 
+  console.log("setIsOtpVerifyBtnEnabled: ", isOtpVerifyBtnEnabled);
+
   const sendOtp = () => {
-    setIsOtpSent(true);
+    setCurrentStep("otp");
+  };
+
+  const verifyOtp = () => {};
+
+  const handleEditPhoneNumber = () => {
+    setCurrentStep("phone");
   };
 
   return (
@@ -88,23 +97,31 @@ const Login = () => {
       </div>
 
       <div className="auth-box">
-        <div>
-          <p className="label">Phone Number</p>
-          <div className="phone-input">
-            <div className="phone-icon">
-              <img src={PhoneFillIcon} alt="phone" />
+        {currentStep === "phone" && (
+          <div>
+            <h4 className="login-head">Communicate Together Better.</h4>
+            <p className="login-para">Start here. One number. Infinite conversations.</p>
+            <div style={{ marginTop: "25px"}}>
+              <p className="label">Phone Number</p>
+              <div className="phone-input">
+                <div className="phone-icon">
+                  <img src={PhoneFillIcon} alt="phone" />
+                </div>
+                <input
+                  type="number"
+                  value={phoneNumber}
+                  onChange={handlePhoneInputChange}
+                />
+              </div>
             </div>
-            <input
-              type="number"
-              value={phoneNumber}
-              onChange={handlePhoneInputChange}
-            />
           </div>
-        </div>
-        {isOtpSent && (
+        )}
+
+        {currentStep === "otp" && (
           <div className="otp-container">
             <p className="label">
-              Enter the 6 - digit OTP code that we sent to
+              Enter the <span style={{ fontWeight: "700" }}>6 - digit</span> OTP
+              code that we sent to
             </p>
             <p className="label">{`# # # # # # # ${phoneNumber.slice(
               7,
@@ -131,13 +148,27 @@ const Login = () => {
       </div>
 
       <button
-        onClick={sendOtp}
-        className={`splash-btn ${phoneNumber.length !== 10 && "disabled-btn"}`}
-        disabled={phoneNumber.length !== 10}
+        onClick={currentStep === "phone" ? sendOtp : verifyOtp}
+        className={`splash-btn ${
+          currentStep === "phone"
+            ? phoneNumber.length !== 10 && "disabled-btn"
+            : !isOtpVerifyBtnEnabled && "disabled-btn"
+        }`}
+        disabled={
+          currentStep === "phone"
+            ? phoneNumber.length !== 10
+            : !isOtpVerifyBtnEnabled
+        }
       >
-        {isOtpSent ? "Verify OTP" : "Send OTP"}
+        {currentStep === "otp" ? "Verify OTP" : "Send OTP"}
         <img src={ArrowRightSvg} alt="" />
       </button>
+
+      {currentStep === "otp" && (
+        <button onClick={handleEditPhoneNumber} className="edit-phone-btn">
+          Edit Phone Number
+        </button>
+      )}
 
       <p className="copyright">ⓒ all rights reserved to fusetalk.</p>
     </div>

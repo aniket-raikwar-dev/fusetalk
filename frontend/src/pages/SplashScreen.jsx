@@ -55,10 +55,10 @@ const SplashScreen = () => {
       <div className="splash-img">
         <img src={SplashMotionImg} alt="" />
       </div>
-      <p className="desktop-warning">
+      {/* <p className="desktop-warning">
         FuseTalk is designed only for mobile devices. Please open this site on a
         phone.
-      </p>
+      </p> */}
 
       <p className="tagline">The future of connected conversations.</p>
       <p className="tagline">

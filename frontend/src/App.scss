@@ -111,7 +111,7 @@ body {
     width: 90%;
   }
   
-  .splash-btn {
+  .splash-btn, .edit-phone-btn {
     margin-top: 40px;
     display: flex;
     align-items: center;
@@ -139,7 +139,8 @@ body {
 
   .auth-box {
     width: 85%;
-    margin-top: 3rem;
+    margin-top: 2rem;
+    // background-color: red;
 
     .label {
       font-size: 0.95rem;
@@ -182,7 +183,7 @@ body {
     }
 
     .otp-container {
-      margin-top: 3rem;
+      // margin-top: 3rem;
     }
 
     .otp-box-container{
@@ -214,6 +215,19 @@ body {
   .disabled-btn {
     background-color: #8e8e8e;
     cursor: not-allowed;
+  }
+  .edit-phone-btn {
+    margin-top: 1.5rem;
+    background-color: #292929;
+    color: #e5e5e5;
+  }
+
+  .login-head {
+    font-size: 1.5rem;
+  }
+  .login-para {
+    font-size: 0.85rem;
+    color: #8e8e8e;
   }
 }
 

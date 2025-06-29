@@ -104,8 +104,9 @@ const Login = () => {
       <div className="auth-box">
         {currentStep === "phone" && (
           <div>
-            <h4 className="login-head">Communicate's Together Better.</h4>
             <h4 className="login-head">Let's Be Join Us.</h4>
+            <h4 className="login-head">Communicate's Together Better.</h4>
+
             <p className="login-para">
               Start here. One number. Infinite conversations.
             </p>

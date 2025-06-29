@@ -7,14 +7,19 @@ const cityNames = [
   "Toronto",
   "Amsterdam",
   "New York",
+  "Austin",
   "Bengaluru",
   "Cape Town",
   "Florida",
   "Delhi NCR",
   "São Paulo",
-  "Los Angelos",
+  "Los Angeles",
   "Mumbai",
   "Seattle",
+  "Jakarta",
+  "Chicago",
+  "Stockholm",
+  "Dublin",
 ];
 
 const Login = () => {
@@ -100,8 +105,10 @@ const Login = () => {
         {currentStep === "phone" && (
           <div>
             <h4 className="login-head">Communicate Together Better.</h4>
-            <p className="login-para">Start here. One number. Infinite conversations.</p>
-            <div style={{ marginTop: "35px"}}>
+            <p className="login-para">
+              Start here. One number. Infinite conversations.
+            </p>
+            <div style={{ marginTop: "35px" }}>
               <p className="label">Phone Number</p>
               <div className="phone-input">
                 <div className="phone-icon">

@@ -8,14 +8,19 @@ const cityNames = [
   "Toronto",
   "Amsterdam",
   "New York",
+  "Austin",
   "Bengaluru",
   "Cape Town",
   "Florida",
   "Delhi NCR",
   "São Paulo",
-  "Los Angelos",
+  "Los Angeles",
   "Mumbai",
   "Seattle",
+  "Jakarta",
+  "Chicago",
+  "Stockholm",
+  "Dublin",
 ];
 
 const SplashScreen = () => {

@@ -126,24 +126,24 @@ body {
     color: #000;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 
-    svg {
+    img {
       width: 20px;
     }
   }
 
   .copyright {
     margin-top: 2.5rem;
-    color: rgb(142, 142, 142);
+    color: #8e8e8e;
     font-size: 0.9rem;
   }
 
   .auth-box {
     width: 85%;
-    // background-color: red;
-    margin-top: 35px;
+    margin-top: 3rem;
 
     .label {
       font-size: 0.95rem;
+      color:#c2c2c2;
     }
 
     .phone-input {
@@ -154,26 +154,35 @@ body {
       width: 100%;
       border: 0.5px solid #ffffff33;
       border-radius: 8px;
-      padding: 0px 10px;
-      letter-spacing: 4px;
       margin-top: 10px;
       background-color: #141414;
-      margin-bottom: 3rem;
 
+      .phone-icon {
+        width: 15%;
+        height: 100%;
+        border-right: 0.5px solid #ffffff33;
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
-      svg {
-        width: 18px;
+        img {
+          width: 18px;
+        }
       }
 
       input {
         outline: none;
         height: 100%;
-        width: 90%;
+        width: 85%;
         border: none;
         background-color: transparent;
-        border-left: 0.5px solid #ffffff33;
         padding-left: 10px;
+        letter-spacing: 4px;
       }
+    }
+
+    .otp-container {
+      margin-top: 3rem;
     }
 
     .otp-box-container{
@@ -181,7 +190,6 @@ body {
       align-items: center;
       justify-content: space-between;
       margin-top: 10px;
-      margin-bottom: 20px;
     }
 
     .otp-box {
@@ -200,7 +208,12 @@ body {
       width: fit-content;
       font-size: 0.85rem;
       color:#8e8e8e;
+      margin-top: 3rem;
     }
+  }
+  .disabled-btn {
+    background-color: #8e8e8e;
+    cursor: not-allowed;
   }
 }
 

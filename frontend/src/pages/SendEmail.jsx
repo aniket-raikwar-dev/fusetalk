@@ -21,7 +21,7 @@ const SendEmail = () => {
   };
 
   return (
-    <div className="base-screen send-email-screen">
+    <div className="base-screen">
       <h3>
         fuse
         <span>
@@ -38,6 +38,12 @@ const SendEmail = () => {
         <div className="send-email-icon">
           <img src={SuccessGIF} alt="" />
         </div>
+      </div>
+
+      
+        <div className="send-email-para">
+          Please check your mail and verify it.
+       
       </div>
 
       <button onClick={openGmailApp} className="base-btn">

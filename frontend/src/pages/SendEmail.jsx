@@ -1,9 +1,13 @@
 import React from "react";
-import SuccessGIF from "../assets/Affirm Success Animation.gif"
+import SuccessGIF from "../assets/Affirm Success Animation.gif";
 
 const SendEmail = () => {
+  const openGmailApp = () => {
+    window.open("https://mail.google.com/", "_blank");
+  };
+
   return (
-    <div className="splash-screen">
+    <div className="base-screen send-email-screen">
       <h3>
         fuse
         <span>
@@ -16,18 +20,13 @@ const SendEmail = () => {
       </p>
 
       <div className="send-email-box">
-        <div className="send-email-text">
-            Email sent success !
-        </div>
+        <div className="send-email-text">Email sent success !</div>
         <div className="send-email-icon">
-            <img src={SuccessGIF} alt="" />
+          <img src={SuccessGIF} alt="" />
         </div>
       </div>
 
-      <button
-        // onClick={sendEmailVerificationLink}
-        className="splash-btn"
-      >
+      <button onClick={openGmailApp} className="base-btn">
         Open Gmail
       </button>
     </div>

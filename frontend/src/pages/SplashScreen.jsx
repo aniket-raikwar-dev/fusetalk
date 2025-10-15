@@ -27,7 +27,7 @@ const SplashScreen = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="splash-screen">
+    <div className="base-screen">
       <h3>
         fuse
         <span>
@@ -71,7 +71,7 @@ const SplashScreen = () => {
         one place.
       </p>
 
-      <button className="splash-btn" onClick={() => navigate("/login")}>
+      <button className="base-btn" onClick={() => navigate("/login")}>
         Join Us Now <img src={ArrowRightSvg} alt="" />
       </button>
 

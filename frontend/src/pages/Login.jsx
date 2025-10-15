@@ -53,7 +53,7 @@ const Login = () => {
       const { error } = await supabase.auth.signInWithOtp({
         email,
         options: {
-          emailRedirectTo: `${window.location.origin}/dashboard`,
+          emailRedirectTo: `${window.location.origin}/home`,
         },
       });
 
@@ -72,7 +72,7 @@ const Login = () => {
   };
 
   return (
-    <div className="splash-screen">
+    <div className="base-screen">
       <h3>
         fuse
         <span>
@@ -113,7 +113,7 @@ const Login = () => {
           <p className="label">Email Address</p>
           <div className="email-input">
             <div className="email-icon">
-              <RiMailFill />
+              <RiMailFill size={24} />
             </div>
             <input type="email" value={email} onChange={handleEmailChange} />
           </div>
@@ -125,7 +125,7 @@ const Login = () => {
 
       <button
         onClick={sendEmailVerificationLink}
-        className="splash-btn"
+        className={`base-btn ${!isValidEmail(email) ? "disabled-btn" : ""}`}
         disabled={!isValidEmail(email)}
       >
         {showLoader ? (

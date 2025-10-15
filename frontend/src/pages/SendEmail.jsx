@@ -3,7 +3,21 @@ import SuccessGIF from "../assets/Affirm Success Animation.gif";
 
 const SendEmail = () => {
   const openGmailApp = () => {
-    window.open("https://mail.google.com/", "_blank");
+    // window.open("https://mail.google.com/", "_blank");
+    const gmailUrlScheme = "googlegmail://co";
+    const webFallback = "https://mail.google.com/";
+
+    // For web, always open in new tab
+    if (/Android/i.test(navigator.userAgent)) {
+      window.location.href = gmailUrlScheme;
+      setTimeout(() => {
+        // fallback to web if app not installed
+        window.open(webFallback, "_blank");
+      }, 500);
+    } else {
+      // For desktop / iOS, just open web Gmail
+      window.open(webFallback, "_blank");
+    }
   };
 
   return (

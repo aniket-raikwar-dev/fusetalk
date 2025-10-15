@@ -47,28 +47,30 @@ const Login = () => {
       return;
     }
 
+    navigate("/home");
+
     setshowLoader(true);
 
-    try {
-      const { error } = await supabase.auth.signInWithOtp({
-        email,
-        options: {
-          emailRedirectTo: `${window.location.origin}/home`,
-        },
-      });
+    // try {
+    //   const { error } = await supabase.auth.signInWithOtp({
+    //     email,
+    //     options: {
+    //       emailRedirectTo: `${window.location.origin}/home`,
+    //     },
+    //   });
 
-      if (error) {
-        setMessage(`Error: ${error.message}`);
-      } else {
-        navigate("/send-email");
-        setMessage("Check your email for the login link!");
-      }
-      setshowLoader(false);
-    } catch (err) {
-      setMessage("Something went wrong. Please try again.");
-      console.error(err);
-      setshowLoader(false);
-    }
+    //   if (error) {
+    //     setMessage(`Error: ${error.message}`);
+    //   } else {
+    //     navigate("/send-email");
+    //     setMessage("Check your email for the login link!");
+    //   }
+    //   setshowLoader(false);
+    // } catch (err) {
+    //   setMessage("Something went wrong. Please try again.");
+    //   console.error(err);
+    //   setshowLoader(false);
+    // }
   };
 
   return (

@@ -1,6 +1,9 @@
-import React, { useRef, useState } from "react";
-import PhoneFillIcon from "../assets/phone-fill.svg";
+import React, { useState } from "react";
 import ArrowRightSvg from "../assets/arrow-right-long-line.svg";
+import { RiMailFill } from "react-icons/ri";
+import { supabase } from "../supabase/supabaseClient.js";
+import { BarLoader } from "react-spinners";
+import { useNavigate } from "react-router-dom";
 
 const cityNames = [
   "San Francisco",
@@ -23,51 +26,49 @@ const cityNames = [
 ];
 
 const Login = () => {
-  const [currentStep, setCurrentStep] = useState("phone");
-  const [otpBoxes, setOtpBoxes] = useState(Array(6).fill(""));
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [isOtpVerifyBtnEnabled, setIsOtpVerifyBtnEnabled] = useState(true);
+  const [email, setEmail] = useState("");
+  const [showLoader, setshowLoader] = useState(false);
+  const [message, setMessage] = useState("");
 
-  const inputsRef = useRef([]);
+  const navigate = useNavigate();
 
-  const handlePhoneInputChange = (e) => {
-    const { value } = e.target;
-    if (value.length <= 10) {
-      setPhoneNumber(e.target.value);
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const isValidEmail = (email) => {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+  };
+
+  const sendEmailVerificationLink = async () => {
+    if (!isValidEmail(email)) {
+      setMessage("Please enter a valid email address.");
+      return;
     }
-  };
 
-  const handleOTPChange = (e, index) => {
-    const { value } = e.target;
+    setshowLoader(true);
 
-    if (!/^\d*$/.test(value)) return;
+    try {
+      const { error } = await supabase.auth.signInWithOtp({
+        email,
+        options: {
+          emailRedirectTo: `${window.location.origin}/dashboard`,
+        },
+      });
 
-    const boxes = [...otpBoxes];
-    boxes[index] = value;
-    setOtpBoxes(boxes);
-
-    if (value && index < otpBoxes.length - 1) {
-      inputsRef.current[index + 1].focus();
+      if (error) {
+        setMessage(`Error: ${error.message}`);
+      } else {
+        navigate("/send-email");
+        setMessage("Check your email for the login link!");
+      }
+      setshowLoader(false);
+    } catch (err) {
+      setMessage("Something went wrong. Please try again.");
+      console.error(err);
+      setshowLoader(false);
     }
-    setIsOtpVerifyBtnEnabled(boxes.every((otp) => otp !== ""));
-  };
-
-  const handleKeyDown = (e, index) => {
-    if (e.key === "Backspace" && !otpBoxes[index] && index >= 0) {
-      inputsRef.current[index - 1].focus();
-    }
-  };
-
-  console.log("setIsOtpVerifyBtnEnabled: ", isOtpVerifyBtnEnabled);
-
-  const sendOtp = () => {
-    setCurrentStep("otp");
-  };
-
-  const verifyOtp = () => {};
-
-  const handleEditPhoneNumber = () => {
-    setCurrentStep("phone");
   };
 
   return (
@@ -102,82 +103,41 @@ const Login = () => {
       </div>
 
       <div className="auth-box">
-        {currentStep === "phone" && (
-          <div>
-            <h4 className="login-head">Let's Be Join Us.</h4>
-            <h4 className="login-head">Communicate's Together Better.</h4>
+        <h4 className="login-head">Let's Be Join Us.</h4>
+        <h4 className="login-head">Communicate's Together Better.</h4>
 
-            <p className="login-para">
-              Start here. One number. Infinite conversations.
-            </p>
-            <div style={{ marginTop: "40px" }}>
-              <p className="label">Phone Number</p>
-              <div className="phone-input">
-                <div className="phone-icon">
-                  <img src={PhoneFillIcon} alt="phone" />
-                </div>
-                <input
-                  type="number"
-                  value={phoneNumber}
-                  onChange={handlePhoneInputChange}
-                />
-              </div>
+        <p className="login-para">
+          Start here. One email. Infinite conversations.
+        </p>
+        <div style={{ marginTop: "40px" }}>
+          <p className="label">Email Address</p>
+          <div className="email-input">
+            <div className="email-icon">
+              <RiMailFill />
             </div>
+            <input type="email" value={email} onChange={handleEmailChange} />
           </div>
-        )}
-
-        {currentStep === "otp" && (
-          <div className="otp-container">
-            <p className="label">
-              Enter the <span style={{ fontWeight: "700" }}>6 - digit</span> OTP
-              code that we sent to
-            </p>
-            <p className="label">{`# # # # # # # ${phoneNumber.slice(
-              7,
-              8
-            )} ${phoneNumber.slice(8, 9)} ${phoneNumber.slice(9, 10)}`}</p>
-            <div className="otp-box-container">
-              {otpBoxes.map((otp, index) => (
-                <input
-                  key={index}
-                  ref={(el) => (inputsRef.current[index] = el)}
-                  type="text"
-                  className="otp-box"
-                  id={index}
-                  value={otp}
-                  maxLength={1}
-                  onChange={(e) => handleOTPChange(e, index)}
-                  onKeyDown={(e) => handleKeyDown(e, index)}
-                />
-              ))}
-            </div>
-            <div className="resend-otp">Resend code in 00:45 s</div>
-          </div>
+        </div>
+        {message && (
+          <p style={{ color: "red", marginTop: "10px" }}>{message}</p>
         )}
       </div>
 
       <button
-        onClick={currentStep === "phone" ? sendOtp : verifyOtp}
-        className={`splash-btn ${
-          currentStep === "phone"
-            ? phoneNumber.length !== 10 && "disabled-btn"
-            : !isOtpVerifyBtnEnabled && "disabled-btn"
-        }`}
-        disabled={
-          currentStep === "phone"
-            ? phoneNumber.length !== 10
-            : !isOtpVerifyBtnEnabled
-        }
+        onClick={sendEmailVerificationLink}
+        className="splash-btn"
+        disabled={!isValidEmail(email)}
       >
-        {currentStep === "otp" ? "Verify OTP" : "Send OTP"}
-        <img src={ArrowRightSvg} alt="" />
+        {showLoader ? (
+          <BarLoader />
+        ) : (
+          <>
+            {" "}
+            Send Email
+            <img src={ArrowRightSvg} alt="" />
+          </>
+        )}
       </button>
-
-      {currentStep === "otp" && (
-        <button onClick={handleEditPhoneNumber} className="edit-phone-btn">
-          Edit Phone Number
-        </button>
-      )}
 
       <p className="copyright">ⓒ all rights reserved to fusetalk.</p>
     </div>
